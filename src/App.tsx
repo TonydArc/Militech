@@ -24,7 +24,6 @@ function App() {
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/checkout' element={<Checkout/>}/>
         <Route path='/detail/:id' element={<Productdetail/>}/>
-
         <Route path='*' element={<Error/>}/>
       </Routes>
 

@@ -1,7 +1,6 @@
-import React from 'react'
+import Productlist from '../component/Product/productlist'
 import Silder from '../component/silder'
 import Store from '../component/store'
-import Productlist from '../component/productlist'
 
 
 export default function Home() {
