@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { getProductsDetail } from "../services/adminService";
@@ -21,6 +22,14 @@ interface Product {
     GraphicsCard: string;
     ReleaseDate: string;
     Details: any;
+}
+
+interface CartItem {
+    ProductId: number;
+    ProductName: string;
+    ImageURL: string;
+    Price: number;
+    Quantity: number;
 }
 
 const ProductDetail = () => {
@@ -47,9 +56,16 @@ const ProductDetail = () => {
         }
     }, [id]); // Add id as a dependency
 
-    const addToCart = (ProductId: number , ProductName: string, ImageURL: string, Price: number , Quantity: number) => {
-        const newItem = { ProductId, ProductName, ImageURL, Price , Quantity };
-        setItems([...items, newItem]);
+
+    const addToCart = (ProductId: number, ProductName: string, ImageURL: string, Price: number, Quantity: number) => {
+        const existingItemIndex = items.findIndex((item: CartItem) => item.ProductId === ProductId);
+
+        if (existingItemIndex !== -1) {
+            alert('san pham da ton tai trong gio hang');
+        } else {
+            const newItem = { ProductId, ProductName, ImageURL, Price , Quantity };
+            setItems([...items, newItem]);
+        }
     };
 
     return (

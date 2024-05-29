@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 
 export default function Checkout() {
     const [auth, setAuth] = useState(false);
+    const [checkingAuth, setCheckingAuth] = useState(true);
     const cookieName = 'access_token';
 
     useEffect(() => {
@@ -12,11 +13,20 @@ export default function Checkout() {
             if (cookie) {
                 setAuth(true);
             }
+            setCheckingAuth(false); // Đặt checkingAuth thành false sau khi kiểm tra cookie
         };
         checkCookie();
     }, []);
 
-    if(!auth) {
+    useEffect(() => {
+        console.log(auth);
+    }, [auth]);
+
+    if (checkingAuth) {
+        return <p>Loading...</p>; // Hoặc bạn có thể hiển thị một spinner tải
+    }
+
+    if (!auth) {
         return <Navigate to="/login" />;
     }
 
@@ -81,5 +91,5 @@ export default function Checkout() {
                 </div>
             </div>
         </>
-    )
+    );
 }

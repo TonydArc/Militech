@@ -40,7 +40,11 @@ export default function Cart() {
             }
         };
         checkCookie();
-    }, []);
+    }, [auth]);
+
+    useEffect(() => {
+        console.log(auth);
+    }, [auth]);
 
     const handleCheckOut = () => {
         if(auth) {

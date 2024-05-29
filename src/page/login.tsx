@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { isLoggedIn } from '../services/untils';
@@ -16,13 +17,13 @@ export default function Login() {
         setPassword(e.target.value);
     }
 
-    useEffect(() => {
-        console.log("Email updated:", email);
-    }, [email]);
+    // useEffect(() => {
+    //     console.log("Email updated:", email);
+    // }, [email]);
 
-    useEffect(() => {
-        console.log("Password updated:", password);
-    }, [password]);
+    // useEffect(() => {
+    //     console.log("Password updated:", password);
+    // }, [password]);
 
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();

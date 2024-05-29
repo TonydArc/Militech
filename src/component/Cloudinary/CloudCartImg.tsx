@@ -11,7 +11,7 @@ interface EditProps {
 const CloudCartImg: React.FC<EditProps> = ({ ImgUrl }) => {
     const cld = new Cloudinary({ cloud: { cloudName: 'dbsou9jps' } });
 
-    console.log("ImgUrl:", ImgUrl);
+    // console.log("ImgUrl:", ImgUrl);
 
     const img = cld.image(ImgUrl) // Removed curly braces around product.ImageURL
         .resize(auto().gravity(autoGravity()).width(160).height(100))

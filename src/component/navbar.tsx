@@ -8,7 +8,6 @@ export default function Navbar() {
     const navigate = useNavigate();
     const cookieName = 'access_token';
 
-
     useEffect(() => {
         const checkCookie = () => {
             const cookies = document.cookie.split('; ');
