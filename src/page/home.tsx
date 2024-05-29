@@ -7,11 +7,9 @@ import useLocalStorage from '../hook/useLocalStorage';
 
 
 export default function Home() {
-  const [items, setItems] = useLocalStorage('items', []);
+  // const [items, setItems] = useLocalStorage('items', []);
 
-  useEffect(() => {
-    setItems([]);
-  }); // Add id as a dependency
+  
   return (
     <>
       <div className="w-full bg-white text-gray-600 work-sans leading-normal text-base tracking-normal">

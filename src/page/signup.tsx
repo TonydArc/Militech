@@ -52,7 +52,7 @@ export default function Signup() {
 
     console.log(checkPass());
 
-    if(checkPass()) {
+    if (checkPass()) {
       try {
         const responseData = await register(userData);
         alert('Sign Up successful');
@@ -60,6 +60,8 @@ export default function Signup() {
       } catch (error) {
         alert('Sign Up failed: ' + error);
       }
+    } else {
+      alert('Password and Confirm Pasword not same');
     }
   }
 

@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom';
 
 export default function Checkout() {
-  return (
-    <>
-        <div className="font-[sans-serif] bg-white-50 p-6 min-h-screen mt-10">
+    const [auth, setAuth] = useState(false);
+    const cookieName = 'access_token';
+
+    useEffect(() => {
+        const checkCookie = () => {
+            const cookies = document.cookie.split('; ');
+            const cookie = cookies.find(cookie => cookie.startsWith(`${cookieName}=`));
+            if (cookie) {
+                setAuth(true);
+            }
+        };
+        checkCookie();
+    }, []);
+
+    if(!auth) {
+        return <Navigate to="/login" />;
+    }
+
+    return (
+        <>
+            <div className="font-[sans-serif] bg-white-50 p-6 min-h-screen mt-10">
                 <div className="max-w-7xl mx-auto">
                     <h2 className="text-3xl font-extrabold text-[#333] text-center">Checkout</h2>
                     <div className="grid lg:grid-cols-3 gap-8 mt-12">
@@ -61,6 +80,6 @@ export default function Checkout() {
                     </div>
                 </div>
             </div>
-    </>
-  )
+        </>
+    )
 }

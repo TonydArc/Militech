@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { getProductsDetail } from "../services/adminService";
 import { useParams } from "react-router-dom";
@@ -46,8 +47,8 @@ const ProductDetail = () => {
         }
     }, [id]); // Add id as a dependency
 
-    const addToCart = (ProductId: number , ProductName: string, Price: number , Quantity: number) => {
-        const newItem = { ProductId, ProductName, Price , Quantity };
+    const addToCart = (ProductId: number , ProductName: string, ImageURL: string, Price: number , Quantity: number) => {
+        const newItem = { ProductId, ProductName, ImageURL, Price , Quantity };
         setItems([...items, newItem]);
     };
 
@@ -75,7 +76,7 @@ const ProductDetail = () => {
                             </ul>
                         </div>
                         {/* add to cart */}
-                        <button type="button" onClick={() => {addToCart(productDetail.ProductId, productDetail.ProductName, productDetail.Price , 1)}} className="w-full py-2.5 bg-gray-800 text-white font-semibold rounded hover:bg-gray-700">Add to cart</button>
+                        <button type="button" onClick={() => {addToCart(productDetail.ProductId, productDetail.ProductName, productDetail.ImageURL, productDetail.Price , 1)}} className="w-full py-2.5 bg-gray-800 text-white font-semibold rounded hover:bg-gray-700">Add to cart</button>
                     </div>
                 </div>
             ) : (
