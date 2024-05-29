@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Dropdown from './dropdown';
+import { isLoggedIn } from '../services/untils';
+import { logout } from '../services/authService';
 export default function Navbar() {
     const [auth, setAuth] = useState(false);
     const navigate = useNavigate();
@@ -21,6 +24,13 @@ export default function Navbar() {
         console.log("auth", auth);
     }, [auth]);
 
+    const handleLogout = () => {
+        logout();
+        if (!isLoggedIn) {
+          navigate("/");
+        }
+        alert('Logged out successfully');
+      };
 
     return (
         <>
@@ -62,7 +72,37 @@ export default function Navbar() {
                     </span>
                     {/* login / user */}
                     {auth ? (
-                        <p>loged</p>
+                        <Dropdown
+                        button={
+                          <img
+                            className="h-10 w-10 rounded-full"
+                            src={'src/assets/tringuyen.jpg'}
+                            alt="Account"
+                          />
+                        }
+                        children={
+                          <div className="flex h-24 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
+                            <div className="mt-3 ml-4">
+                              <div className="flex items-center gap-2">
+                                <p className="text-sm font-bold text-navy-700 dark:text-white">
+                                  {/* Hey, {profile} */}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="mt-3 h-px w-full bg-gray-200 dark:bg-white/20 " />
+                            <div className="mt-3 ml-4 flex flex-col">
+                              <a
+                                onClick={handleLogout}
+                                href=""
+                                className="mt-3 text-sm font-medium text-red-500 hover:text-red-500"
+                              >
+                                Log Out
+                              </a>
+                            </div>
+                          </div>
+                        }
+                        classNames={"py-2 top-8 -left-[180px] w-max"}
+                      />
                     ) : (
                         <div onClick={() => { navigate('/login') }} className="inline-block cursor-pointer border-gray-300">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24"
