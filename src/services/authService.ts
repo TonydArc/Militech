@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import axios from 'axios';
 import { getAccessToken, setToken } from './untils';
 import Cookies from 'universal-cookie';
@@ -12,7 +13,7 @@ export async function register(formdata: {
 }) {
     const users = await axios.post(API_URL + 'register', formdata);
     return users;
-};
+}
 
 export async function login(formdata: {
     'email': string,
@@ -30,7 +31,7 @@ export async function login(formdata: {
         console.error('Login error:', error);
         throw error;
     }
-};
+}
 
 export async function getProfile() {
     const token = getAccessToken();
@@ -58,7 +59,7 @@ export async function logout() {
     } catch (error) {
         console.log('logout error', error);
     }
-};
+}
 
 
 
