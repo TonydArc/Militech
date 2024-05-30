@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { getProductsDetail } from "../services/adminService";
 import { useParams } from "react-router-dom";
 import CloudinaryDetailImg from "../component/Cloudinary/CloudImg";
+import useLocalStorage from "../hook/useLocalStorage";
 
 interface Product {
     ProductId: number;
@@ -21,8 +24,17 @@ interface Product {
     Details: any;
 }
 
+interface CartItem {
+    ProductId: number;
+    ProductName: string;
+    ImageURL: string;
+    Price: number;
+    Quantity: number;
+}
+
 const ProductDetail = () => {
     const [productDetail, setProductDetail] = useState<Product | null>(null);
+    const [items, setItems] = useLocalStorage('items', []);
     const { id } = useParams();
 
     useEffect(() => {
@@ -31,6 +43,8 @@ const ProductDetail = () => {
                 if (typeof id === 'string') {
                     const productsData = await getProductsDetail(parseInt(id, 10));
                     setProductDetail(productsData);
+                    console.log(productsData);
+                    
                 }
             } catch (err) {
                 console.error("Error fetching product details:", err);
@@ -41,6 +55,18 @@ const ProductDetail = () => {
             fetchDetailProducts();
         }
     }, [id]); // Add id as a dependency
+
+
+    const addToCart = (ProductId: number, ProductName: string, ImageURL: string, Price: number, Quantity: number) => {
+        const existingItemIndex = items.findIndex((item: CartItem) => item.ProductId === ProductId);
+
+        if (existingItemIndex !== -1) {
+            alert('san pham da ton tai trong gio hang');
+        } else {
+            const newItem = { ProductId, ProductName, ImageURL, Price , Quantity };
+            setItems([...items, newItem]);
+        }
+    };
 
     return (
         <div className="container mx-auto px-4">
@@ -65,7 +91,8 @@ const ProductDetail = () => {
                                 <li><span className="font-semibold">Graphics Card:</span> {productDetail.Details.GraphicsCard}</li>
                             </ul>
                         </div>
-                        <button type="button" className="w-full py-2.5 bg-gray-800 text-white font-semibold rounded hover:bg-gray-700">Add to cart</button>
+                        {/* add to cart */}
+                        <button type="button" onClick={() => {addToCart(productDetail.ProductId, productDetail.ProductName, productDetail.ImageURL, productDetail.Price , 1)}} className="w-full py-2.5 bg-gray-800 text-white font-semibold rounded hover:bg-gray-700">Add to cart</button>
                     </div>
                 </div>
             ) : (

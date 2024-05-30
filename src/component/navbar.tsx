@@ -1,7 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Dropdown from './dropdown';
+import { isLoggedIn } from '../services/untils';
+import { logout } from '../services/authService';
 export default function Navbar() {
+    const [auth, setAuth] = useState(false);
     const navigate = useNavigate();
+    const cookieName = 'access_token';
+
+    useEffect(() => {
+        const checkCookie = () => {
+            const cookies = document.cookie.split('; ');
+            const cookie = cookies.find(cookie => cookie.startsWith(`${cookieName}=`));
+            if (cookie) {
+                setAuth(true);
+            }
+        };
+        checkCookie();
+    }, []);
+
+    useEffect(() => {
+        console.log("auth", auth);
+    }, [auth]);
+
+    const handleLogout = () => {
+        logout();
+        if (!isLoggedIn) {
+          navigate("/");
+        }
+        alert('Logged out successfully');
+      };
 
     return (
         <>
@@ -32,7 +60,7 @@ export default function Navbar() {
                         <span className="absolute left-auto -ml-1 top-0 rounded-full bg-black px-1 py-0 text-xs text-white">1</span>
                     </span>
                     {/* cart */}
-                    <span onClick={() => {navigate('/cart')}} className="relative sm:mr-8 mr-6">
+                    <span onClick={() => { navigate('/cart') }} className="relative sm:mr-8 mr-6">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
                             className="cursor-pointer fill-[#333] hover:fill-[#007bff] inline-block" viewBox="0 0 512 512">
                             <path
@@ -41,7 +69,51 @@ export default function Navbar() {
                         </svg>
                         {/* <span className="absolute left-auto -ml-1 top-0 rounded-full bg-black px-1 py-0 text-xs text-white">4</span> */}
                     </span>
-                    <div className="inline-block cursor-pointer border-gray-300">
+                    {/* login / user */}
+                    {auth ? (
+                        <Dropdown
+                        button={
+                          <img
+                            className="h-10 w-10 rounded-full"
+                            src={'src/assets/tringuyen.jpg'}
+                            alt="Account"
+                          />
+                        }
+                        children={
+                          <div className="flex h-24 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
+                            <div className="mt-3 ml-4">
+                              <div className="flex items-center gap-2">
+                                <p className="text-sm font-bold text-navy-700 dark:text-white">
+                                  {/* Hey, {profile} */}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="mt-3 h-px w-full bg-gray-200 dark:bg-white/20 " />
+                            <div className="mt-3 ml-4 flex flex-col">
+                              <a
+                                onClick={handleLogout}
+                                href=""
+                                className="mt-3 text-sm font-medium text-red-500 hover:text-red-500"
+                              >
+                                Log Out
+                              </a>
+                            </div>
+                          </div>
+                        }
+                        classNames={"py-2 top-8 -left-[180px] w-max"}
+                      />
+                    ) : (
+                        <div onClick={() => { navigate('/login') }} className="inline-block cursor-pointer border-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24"
+                                className="hover:fill-[#007bff]">
+                                <circle cx="10" cy="7" r="6" data-original="#000000" />
+                                <path
+                                    d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                                    data-original="#000000" />
+                            </svg>
+                        </div>
+                    )}
+                    {/* <div onClick={() => { navigate('/login') }} className="inline-block cursor-pointer border-gray-300">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24"
                             className="hover:fill-[#007bff]">
                             <circle cx="10" cy="7" r="6" data-original="#000000" />
@@ -49,7 +121,7 @@ export default function Navbar() {
                                 d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
                                 data-original="#000000" />
                         </svg>
-                    </div>
+                    </div> */}
                 </div>
             </section>
             <div className='flex flex-wrap justify-center px-10 py-3 relative'>
@@ -138,20 +210,13 @@ export default function Navbar() {
                             </li>
                         </ul>
                     </li>
-                    <li className='max-lg:border-b max-lg:py-2'><a href='javascript:void(0)'
+                    {/* <li className='max-lg:border-b max-lg:py-2'><a href='javascript:void(0)'
                         className='hover:text-[#007bff] text-gray-600 font-semibold text-[15px] block'>Nam</a></li>
                     <li className='max-lg:border-b max-lg:py-2'><a href='javascript:void(0)'
-                        className='hover:text-[#007bff] text-gray-600 font-semibold text-[15px] block'>Nu</a></li>
+                        className='hover:text-[#007bff] text-gray-600 font-semibold text-[15px] block'>Nu</a></li> */}
+                    
                     <li className='max-lg:border-b max-lg:py-2'><a href='/about'
                         className='hover:text-[#007bff] text-gray-600 font-semibold text-[15px] block'>About</a></li>
-                    {/* <li className='max-lg:border-b max-lg:py-2'><a href='javascript:void(0)'
-            className='hover:text-[#007bff] text-gray-600 font-semibold text-[15px] block'>Contact</a></li>
-          <li className='max-lg:border-b max-lg:py-2'><a href='javascript:void(0)'
-            className='hover:text-[#007bff] text-gray-600 font-semibold text-[15px] block'>Source</a></li>
-          <li className='max-lg:border-b max-lg:py-2'><a href='javascript:void(0)'
-            className='hover:text-[#007bff] text-gray-600 font-semibold text-[15px] block'>Partner</a></li>
-          <li className='max-lg:border-b max-lg:py-2'><a href='javascript:void(0)'
-            className='hover:text-[#007bff] text-gray-600 font-semibold text-[15px] block'>More</a></li> */}
                 </ul>
             </div>
         </>
