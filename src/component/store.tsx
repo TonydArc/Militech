@@ -7,7 +7,7 @@ export default function Store() {
                 <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
 
                     <a className="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " href="#">
-                        Store
+                        Laptop bán chạy
                     </a>
 
                     <div className="flex items-center" id="store-nav-content">

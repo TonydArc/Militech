@@ -79,7 +79,7 @@ const ProductDetail = () => {
                     </div>
                     <div className="space-y-6">
                         <h2 className="text-2xl font-bold text-gray-800">{productDetail.ProductName}</h2>
-                        <p className="text-gray-600">${productDetail.Price}</p>
+                        <p className="text-gray-600">{productDetail.Price}</p>
                         <div>
                             <h3 className="text-lg font-bold text-gray-800 mt-6">Product information</h3>
                             <ul className="mt-2 text-gray-600">

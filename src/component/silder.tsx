@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function Silder() {
   return (
     <>
@@ -8,7 +6,7 @@ export default function Silder() {
                     {/* Slide 1 */}
                     <input className="carousel-open absolute bottom-4" type="radio" id="carousel-1" name="carousel" aria-hidden="false" />
                     <div className="carousel-item absolute opacity-0" style={{ height: '50vh' }}>
-                        <div className="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
+                        <div className=" h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
                             style={{ backgroundImage: "url('https://w0.peakpx.com/wallpaper/118/844/HD-wallpaper-rolex-submariner-black-dial-watch-rolex.jpg')" }}>
                             <div className="container mx-auto">
                                 <div className="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
@@ -25,7 +23,7 @@ export default function Silder() {
                     {/* Slide 2 */}
                     <input className="carousel-open absolute bottom-4" type="radio" id="carousel-2" name="carousel" aria-hidden="true"  />
                     <div className="carousel-item absolute opacity-0 bg-cover bg-right" style={{ height: '50vh' }}>
-                        <div className="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
+                        <div className=" h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
                             style={{ backgroundImage: "url('https://grandseikoboutique.com.au/img/watchPages/SLGA023/SLGA023_pc.jpg')" }}>
                             <div className="container mx-auto">
                                 <div className="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">

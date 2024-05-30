@@ -26,10 +26,10 @@ export default function Navbar() {
     const handleLogout = () => {
         logout();
         if (!isLoggedIn) {
-          navigate("/");
+            navigate("/");
         }
         alert('Logged out successfully');
-      };
+    };
 
     return (
         <>
@@ -72,36 +72,48 @@ export default function Navbar() {
                     {/* login / user */}
                     {auth ? (
                         <Dropdown
-                        button={
-                          <img
-                            className="h-10 w-10 rounded-full"
-                            src={'src/assets/tringuyen.jpg'}
-                            alt="Account"
-                          />
-                        }
-                        children={
-                          <div className="flex h-24 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
-                            <div className="mt-3 ml-4">
-                              <div className="flex items-center gap-2">
-                                <p className="text-sm font-bold text-navy-700 dark:text-white">
-                                  {/* Hey, {profile} */}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="mt-3 h-px w-full bg-gray-200 dark:bg-white/20 " />
-                            <div className="mt-3 ml-4 flex flex-col">
-                              <a
-                                onClick={handleLogout}
-                                href=""
-                                className="mt-3 text-sm font-medium text-red-500 hover:text-red-500"
-                              >
-                                Log Out
-                              </a>
-                            </div>
-                          </div>
-                        }
-                        classNames={"py-2 top-8 -left-[180px] w-max"}
-                      />
+                            button={
+                                <img
+                                    className="h-10 w-10 rounded-full"
+                                    src={'src/assets/tringuyen.jpg'}
+                                    alt="Account"
+                                />
+                            }
+                            children={
+                                <div className="flex h-24 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
+                                    <div className="mt-3 ml-4">
+                                        <div className="flex items-center gap-2">
+                                            <p className="text-sm font-bold text-navy-700 dark:text-white">
+                                                {/* Hey, {profile} */}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="mt-3 h-px w-full bg-gray-200 dark:bg-white/20 " />
+                                    <div className="mt-3 ml-4 flex flex-col">
+                                        <a
+                                            onClick={handleLogout}
+                                            href=""
+                                            className="mt-3 text-sm font-medium text-red-500 hover:text-red-500"
+                                        >
+                                            Đăng xuất
+                                        </a>
+                                        <a
+                                            href="/order"
+                                            className=" flex mt-3 text-sm font-medium text-black hover:text-blue-600"
+                                        >
+                                            Đơn hàng
+                                            <svg className='mx-2' width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="2" y="3" width="20" height="18" rx="2" fill="#e0e0e0" stroke="#000" stroke-width="2" />
+                                                <rect x="6" y="6" width="12" height="1" fill="#000" />
+                                                <rect x="6" y="10" width="12" height="1" fill="#000" />
+                                                <rect x="6" y="14" width="8" height="1" fill="#000" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                            classNames={"py-2 top-8 -left-[180px] w-max"}
+                        />
                     ) : (
                         <div onClick={() => { navigate('/login') }} className="inline-block cursor-pointer border-gray-300">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24"
@@ -136,10 +148,10 @@ export default function Navbar() {
                 </div>
                 <ul id="collapseMenu" className='lg:!flex lg:space-x-10 max-lg:space-y-3 max-lg:hidden max-lg:w-full max-lg:my-4'>
                     <li className='max-lg:border-b max-lg:py-2'><a href='/'
-                        className='hover:text-[#007bff] text-[#007bff] font-semibold block text-[15px]'>Home</a></li>
+                        className='hover:text-[#007bff] text-[#007bff] font-semibold block text-[15px]'>Trang Chủ</a></li>
                     <li className='group max-lg:border-b max-lg:py-2 relative'>
                         <a href='javascript:void(0)'
-                            className='hover:text-[#007bff] hover:fill-[#007bff] text-gray-600 font-semibold text-[15px] block'>Store<svg
+                            className='hover:text-[#007bff] hover:fill-[#007bff] text-gray-600 font-semibold text-[15px] block'>Danh Mục<svg
                                 xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" className="ml-1 inline-block" viewBox="0 0 24 24">
                                 <path
                                     d="M12 16a1 1 0 0 1-.71-.29l-6-6a1 1 0 0 1 1.42-1.42l5.29 5.3 5.29-5.29a1 1 0 0 1 1.41 1.41l-6 6a1 1 0 0 1-.7.29z"
@@ -214,7 +226,7 @@ export default function Navbar() {
                         className='hover:text-[#007bff] text-gray-600 font-semibold text-[15px] block'>Nam</a></li>
                     <li className='max-lg:border-b max-lg:py-2'><a href='javascript:void(0)'
                         className='hover:text-[#007bff] text-gray-600 font-semibold text-[15px] block'>Nu</a></li> */}
-                    
+
                     <li className='max-lg:border-b max-lg:py-2'><a href='/about'
                         className='hover:text-[#007bff] text-gray-600 font-semibold text-[15px] block'>About</a></li>
                 </ul>
